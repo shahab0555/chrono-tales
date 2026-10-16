@@ -1,0 +1,147 @@
+{
+  "title": "The Lost Crown",
+  "startSceneId": "scene-palace-time",
+  "scenes": [
+    {
+      "id": "scene-palace-time",
+      "title": "The Palace at the Edge of Time",
+      "text": "You awaken upon a terrace of frost-carved sapphire, suspended between a frozen sky and a sea of silver clouds. Before you stands a grand gateway of crystalline spires towering into the midnight blue. An ancient inscription glowing in cyan runes reads:\n\n'All time is a river of glass; one who walks backward may mend what was shattered.'\n\nIn your palm rests an antique silver chronometer, ticking softly against the silence of the cosmos. Three paths branch from the moonlit terrace.",
+      "isEnding": false,
+      "choices": [
+        {
+          "text": "Step through the Arch of Starlight toward the gardens.",
+          "targetId": "scene-garden-stars"
+        },
+        {
+          "text": "Descend the spiraling crystal staircase into the whispering hall.",
+          "targetId": "scene-hall-echoes"
+        },
+        {
+          "text": "Follow the misty aqueduct where the water defies gravity.",
+          "targetId": "scene-river-backward"
+        }
+      ]
+    },
+    {
+      "id": "scene-garden-stars",
+      "title": "The Garden of Sleeping Stars",
+      "text": "Blossoms of spun diamond bow under the weight of dormant constellations. Each flower emits a soft chime, whispering memories of lives you never lived. The scent of ozone and crushed winter lilies fills the air.\n\nAt the garden's heart rests an illuminated marble pedestal supporting an immense open codex. Nearby, an iron gate leads down into a chilled subterranean crypt, its threshold covered in hoarfrost.",
+      "isEnding": false,
+      "choices": [
+        {
+          "text": "Approach the pedestal and examine the Queen's illuminated pages.",
+          "targetId": "scene-unwritten-book"
+        },
+        {
+          "text": "Descend the cold stone steps into the mist-filled crypt.",
+          "targetId": "scene-flooded-crypt"
+        },
+        {
+          "text": "Return to the grand palace terrace to reconsider your path.",
+          "targetId": "scene-palace-time"
+        }
+      ]
+    },
+    {
+      "id": "scene-hall-echoes",
+      "title": "The Hall of Echoes",
+      "text": "Vaulted arches of violet quartz stretch into infinite darkness. Whispers ricochet from polished mirrors—voices of past monarchs pleading for forgiveness and warning of the Great Freeze.\n\nOne towering mirror reflects a rushing upside-down river; another reflects the glowing atrium of a celestial royal library. The floor beneath you vibrates with latent magical energy.",
+      "isEnding": false,
+      "choices": [
+        {
+          "text": "Touch the mirror reflecting the inverted river.",
+          "targetId": "scene-river-backward"
+        },
+        {
+          "text": "Speak your true name into the silence to challenge the echoes.",
+          "targetId": "scene-unwritten-book"
+        },
+        {
+          "text": "Slip into the sunken passageway where stagnant water laps.",
+          "targetId": "scene-flooded-crypt"
+        }
+      ]
+    },
+    {
+      "id": "scene-river-backward",
+      "title": "Where the River Runs Backward",
+      "text": "Liquid luminescence flows uphill against the gravity of the heavens, cascading into a celestial reservoir that hovers directly above the palace spires. Droplets rise like inverted rain, sparkling with violet light.\n\nIn the shimmering current, you catch fleeting glimpses of Asterfall before the freeze: golden festivals, laughter in emerald courtyards, and the coronation of the Lost Sovereign.",
+      "isEnding": false,
+      "choices": [
+        {
+          "text": "Drink from the inverted water to absorb its forgotten memories.",
+          "targetId": "scene-crown-remembering"
+        },
+        {
+          "text": "Follow the silver flume toward the ancient library high above.",
+          "targetId": "scene-unwritten-book"
+        },
+        {
+          "text": "Dive into the depths where the current spirals into the abyss.",
+          "targetId": "scene-flooded-crypt"
+        }
+      ]
+    },
+    {
+      "id": "scene-unwritten-book",
+      "title": "The Queen's Unwritten Book",
+      "text": "An immense tome floats above a pool of starlight, its blank vellum pages turning on their own in an unseen breeze. Inkwells of liquefied dusk and dawn stand ready upon a carved lectern.\n\nThe translucent spirit of the Queen of Asterfall materializes before you in shimmering starlight. 'Write our conclusion, traveler,' she whispers. 'Our realm has remained frozen in indecision for a thousand cycles. Only your hand can break the seal.'",
+      "isEnding": false,
+      "choices": [
+        {
+          "text": "Pen an oath of eternal guardianship over Asterfall's frozen realm.",
+          "targetId": "scene-keeper-asterfall"
+        },
+        {
+          "text": "Inscribe words of release, letting all frozen time thaw into tomorrow.",
+          "targetId": "scene-first-morning"
+        },
+        {
+          "text": "Trace the forgotten runes of coronation upon the parchment.",
+          "targetId": "scene-crown-remembering"
+        }
+      ]
+    },
+    {
+      "id": "scene-flooded-crypt",
+      "title": "The Flooded Crypt",
+      "text": "Ankle-deep water mirrors the fractured ceiling where distant stars peer through cracked blue ice. Ancient sarcophagi of fallen sovereigns line the silent colonnade, each inscribed with forgotten constellations.\n\nAt the crypt's sunken altar, two relics glow with opposing light: a circlet forged of crystallized memory and a dormant sun-crystal waiting to be ignited. A staircase winds upward into the highest bell tower.",
+      "isEnding": false,
+      "choices": [
+        {
+          "text": "Lift the Crown of Remembering and place it upon your brow.",
+          "targetId": "scene-crown-remembering"
+        },
+        {
+          "text": "Shatter the dormant sun-crystal upon the altar to banish the night.",
+          "targetId": "scene-first-morning"
+        },
+        {
+          "text": "Climb the moss-covered bell tower into the realm's apex.",
+          "targetId": "scene-keeper-asterfall"
+        }
+      ]
+    },
+    {
+      "id": "scene-crown-remembering",
+      "title": "A Crown Made of Remembering",
+      "text": "The crown settles upon your brow with a cold, electrifying certainty. Every forgotten life, every unmade vow, and every fallen star of Asterfall floods into your consciousness in an instant of brilliant clarity.\n\nYou do not reign over mortal subjects, but over the living memory of all that was lost. The floating palace blazes in radiant cyan splendor, an eternal archive preserved forever against the cold march of oblivion. You take your seat upon the sapphire throne, sovereign of eternity.",
+      "isEnding": true,
+      "choices": []
+    },
+    {
+      "id": "scene-first-morning",
+      "title": "The First Morning",
+      "text": "The eternal frost cracks with a sound like ringing crystal bells. Golden light—unseen for a thousand millennia—bursts over the horizon, bathing the palace towers in warm amber and rose.\n\nThe inverted river falls in sweet summer rain, nourishing green shoots in the awakening valleys far below the clouds. The curse of frozen time dissolves into morning mist. The loop is broken at last. The world begins anew, and you step forward into the dawn.",
+      "isEnding": true,
+      "choices": []
+    },
+    {
+      "id": "scene-keeper-asterfall",
+      "title": "The Keeper of Asterfall",
+      "text": "You take your eternal vigil at the throne of the highest spire, chronometer in hand, watching over the tides of time that swirl beneath the floating citadel.\n\nTravelers across the multiverse will look up and see your beacon shining among the constellations—a steadfast sentinel guarding the sacred gateway between yesterday and tomorrow. The palace endures, guided by your quiet, watchful soul.",
+      "isEnding": true,
+      "choices": []
+    }
+  ]
+}

@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CHRONO TALES — Premium Cinematic 3D Branching Story Builder</title>
+  <meta name="description" content="Every Choice Creates a Universe. Create, explore, and play branching interactive stories within a mysterious world of floating crystal spires.">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800;900&family=Cinzel+Decorative:wght@700;900&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  
+  <!-- Styles -->
+  <link rel="stylesheet" href="style.css">
+  
+  <!-- Three.js CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body class="theme-dark">
+  <!-- Audio ambiance toggle (optional subtle aesthetic touch) -->
+  
+  <!-- NAVIGATION -->
+  <header class="site-header" id="site-header">
+    <div class="header-inner container-fluid">
+      <a href="#hero" class="brand-logo" aria-label="Chrono Tales Home">
+        <span class="brand-symbol">
+          <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M16 2L28 10V22L16 30L4 22V10L16 2Z" stroke="url(#brand-grad)" stroke-width="2" stroke-linejoin="round"/>
+            <path d="M16 7L23 12V20L16 25L9 20V12L16 7Z" fill="url(#brand-fill)" fill-opacity="0.25" stroke="url(#brand-grad)" stroke-width="1.5"/>
+            <circle cx="16" cy="16" r="3" fill="#43E6E8"/>
+            <defs>
+              <linearGradient id="brand-grad" x1="4" y1="2" x2="28" y2="30" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#43E6E8"/>
+                <stop offset="0.5" stop-color="#7DDCFF"/>
+                <stop offset="1" stop-color="#A78BFA"/>
+              </linearGradient>
+              <linearGradient id="brand-fill" x1="9" y1="7" x2="23" y2="25" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#7DDCFF"/>
+                <stop offset="1" stop-color="#A78BFA"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </span>
+        <span class="brand-text">
+          <span class="brand-title">CHRONO TALES</span>
+          <span class="brand-sub">BRANCHING UNIVERSE</span>
+        </span>
+      </a>
+
+      <nav class="main-nav" aria-label="Main Navigation">
+        <ul class="nav-links">
+          <li><a href="#hero" class="nav-link active" data-nav="hero">Palace</a></li>
+          <li><a href="#story-studio" class="nav-link" data-nav="studio">Story Studio</a></li>
+          <li><a href="#play-mode-section" class="nav-link" data-nav="play">Play Mode</a></li>
+          <li><a href="#story-gallery" class="nav-link" data-nav="gallery">Adventures</a></li>
+          <li><a href="#diagnostics-anchor" class="nav-link" data-nav="diagnostics">Diagnostics</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <div class="autosave-badge" id="nav-save-badge" title="Auto-saved locally in browser">
+          <span class="pulse-indicator"></span>
+          <span class="badge-text" id="nav-save-text">Saved in browser</span>
+        </div>
+        <button type="button" class="btn btn-sm btn-outline-cyan" id="nav-quick-play-btn">
+          <span class="btn-icon">▶</span> Play Demo
+        </button>
+        <a href="#story-studio" class="btn btn-sm btn-primary-violet" id="nav-cta-btn">
+          <span>Create Story</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <!-- ================================================== -->
+    <!-- B & C. CINEMATIC SCROLL-DRIVEN PALACE HERO -->
+    <!-- ================================================== -->
+    <section class="hero-scroll-track" id="hero" aria-label="Floating Ice Palace Cinematic Experience">
+      <div class="hero-sticky-stage" id="hero-sticky-stage">
+        
+        <!-- 3D Three.js WebGL Canvas -->
+        <div class="palace-3d-wrapper" id="palace-3d-container">
+          <canvas id="palace-canvas" aria-label="Interactive 3D Floating Ice Palace in night clouds"></canvas>
+          
+          <!-- Fallback if WebGL fails or disabled -->
+          <div class="palace-fallback" id="palace-fallback" aria-hidden="true">
+            <div class="fallback-moon"></div>
+            <div class="fallback-palace-graphic"></div>
+            <div class="fallback-clouds"></div>
+          </div>
+        </div>
+
+        <!-- Atmospheric Vignette & Gradients -->
+        <div class="hero-atmosphere-overlay"></div>
+
+        <!-- Cinematic Scroll Phase Content Overlays -->
+        <div class="hero-content-viewport container">
+          
+          <!-- PHASE 1: The Mystery (Left column layout) -->
+          <div class="hero-phase phase-1 active" id="hero-phase-1">
+            <div class="hero-grid">
+              <div class="hero-left-col">
+                <div class="hero-tagline-badge">
+                  <span class="sparkle">✦</span> Interactive 3D Branching Storytelling
+                </div>
+                
+                <h1 class="hero-headline">
+                  Every Choice<br>
+                  Creates a<br>
+                  <span class="universe-italic">Universe.</span>
+                </h1>
+                
+                <p class="hero-subtext">
+                  Build worlds that bend around every decision. Step inside and see where your story leads.
+                </p>
+                
+                <div class="hero-cta-group">
+                  <a href="#story-studio" class="btn btn-lg btn-glow-cyan" id="hero-primary-cta">
+                    <span class="btn-text">Create Your Story</span>
+                    <span class="btn-arrow">→</span>
+                  </a>
+                  <button type="button" class="btn btn-lg btn-glass-violet" id="hero-secondary-cta">
+                    <span class="btn-play-icon">▶</span>
+                    <span class="btn-text">Play the Demo</span>
+                  </button>
+                </div>
+
+                <div class="hero-metrics">
+                  <div class="metric-item">
+                    <span class="metric-num" id="hero-scene-count-badge">9</span>
+                    <span class="metric-label">Scenes Ready</span>
+                  </div>
+                  <div class="metric-divider"></div>
+                  <div class="metric-item">
+                    <span class="metric-num">3</span>
+                    <span class="metric-label">Unique Endings</span>
+                  </div>
+                  <div class="metric-divider"></div>
+                  <div class="metric-item">
+                    <span class="metric-num">100%</span>
+                    <span class="metric-label">Client Side</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="hero-right-col">
+                <!-- Interactive Floating Crystal Hologram HUD -->
+                <div class="crystal-hud-card" id="crystal-hud">
+                  <div class="hud-top">
+                    <span class="hud-pill">REALM OF ASTERFALL</span>
+                    <span class="hud-coords">ALTITUDE: 14,200 FT</span>
+                  </div>
+                  <div class="hud-center-notice">
+                    <span class="hud-crystal-indicator">◆ CHRONO CRYSTAL ACTIVE</span>
+                    <p class="hud-hint">Scroll down to unveil the floating foundation</p>
+                  </div>
+                  <div class="hud-scroll-bar">
+                    <div class="hud-scroll-fill" id="hud-scroll-fill"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- PHASE 2: The Ascent (Mid scroll narrative revelation) -->
+          <div class="hero-phase phase-2" id="hero-phase-2">
+            <div class="phase-2-inner">
+              <span class="phase-subtitle-badge">CHRONICLES OF THE FROZEN SPHERE</span>
+              <h2 class="phase-2-quote">
+                "Beneath the frost-carved sapphire spires, unwritten destinies await the traveler who dares to turn the key."
+              </h2>
+              <p class="phase-2-desc">
+                Ascending through the celestial cloud banks of Asterfall
+              </p>
+            </div>
+          </div>
+
+          <!-- PHASE 3: The Full Reveal (Wide cinematic composition) -->
+          <div class="hero-phase phase-3" id="hero-phase-3">
+            <div class="phase-3-inner">
+              <span class="reveal-badge">◆ THE SPIRE OF ETERNITY FULLY REVEALED ◆</span>
+              <h2 class="phase-3-title">The Foundation of All Timelines</h2>
+              <p class="phase-3-text">
+                Suspended between frozen constellations and the sea of silver mist, every corridor branches into a new reality.
+              </p>
+              <div class="phase-3-actions">
+                <a href="#story-studio" class="btn btn-xl btn-glow-cyan" id="enter-studio-cta">
+                  <span>Enter the Story Studio</span>
+                  <span class="btn-arrow">→</span>
+                </a>
+                <button type="button" class="btn btn-xl btn-glass-violet" id="full-reveal-play-cta">
+                  <span>▶ Play "The Lost Crown"</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Scroll Indicator Wheel -->
+        <div class="scroll-indicator" id="hero-scroll-indicator">
+          <div class="mouse-icon">
+            <span class="mouse-wheel"></span>
+          </div>
+          <span class="scroll-text">SCROLL TO UNVEIL PALACE</span>
+          <span class="scroll-arrow">↓</span>
+        </div>
+
+        <!-- Scroll Progress Bar -->
+        <div class="scroll-progress-line">
+          <div class="scroll-progress-bar" id="palace-scroll-progress-bar"></div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================================================== -->
+    <!-- D. STORYTELLING INTRODUCTION -->
+    <!-- ================================================== -->
+    <section class="section intro-section" id="story-intro">
+      <div class="container">
+        <div class="section-header text-center">
+          <div class="section-tag">ARCHITECT OF DESTINIES</div>
+          <h2 class="section-headline">One world. Endless possibilities.</h2>
+          <p class="section-subtext">
+            Authors connect scenes, forge meaningful choices, and sculpt labyrinthine adventures with multiple endings. Readers step across the threshold into worlds born of your imagination.
+          </p>
+        </div>
+
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon-wrapper cyan-glow">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M6 3v12"/>
+                <circle cx="18" cy="6" r="3"/>
+                <circle cx="6" cy="18" r="3"/>
+                <path d="M18 9a9 9 0 0 1-9 9"/>
+              </svg>
+            </div>
+            <h3 class="feature-title">Branching Narrative Logic</h3>
+            <p class="feature-desc">
+              Construct branching pathways with up to four choices per scene. Route readers toward dramatic climaxes, secret passages, and resonant conclusions.
+            </p>
+            <div class="feature-badge">Up to 4 Choices / Scene</div>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon-wrapper violet-glow">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="7" height="7"/>
+                <rect x="14" y="3" width="7" height="7"/>
+                <rect x="14" y="14" width="7" height="7"/>
+                <rect x="3" y="14" width="7" height="7"/>
+                <path d="M10 6.5h4M6.5 10v4M17.5 10v4M10 17.5h4"/>
+              </svg>
+            </div>
+            <h3 class="feature-title">Live Visual Story Graph</h3>
+            <p class="feature-desc">
+              Watch your universe take form on an interactive topological map. Color-coded nodes distinguish starting points, narrative crossroads, and final endings.
+            </p>
+            <div class="feature-badge">Instant Sync & Pan</div>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon-wrapper gold-glow">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                <polyline points="22 4 12 14.01 9 11.01"/>
+              </svg>
+            </div>
+            <h3 class="feature-title">BFS Story Diagnostics</h3>
+            <p class="feature-desc">
+              Automatic graph traversal algorithms identify orphaned scenes, dead-end non-ending nodes, and broken destination links before your readers ever stumble.
+            </p>
+            <div class="feature-badge">Zero-Crash Guarantee</div>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon-wrapper ice-glow">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                <polyline points="7 10 12 15 17 10"/>
+                <line x1="12" y1="15" x2="12" y2="3"/>
+              </svg>
+            </div>
+            <h3 class="feature-title">Portability & Autosave</h3>
+            <p class="feature-desc">
+              Continuous localStorage autosave protects your prose in real-time. Export and import validated JSON story bundles to share with fellow worldbuilders.
+            </p>
+            <div class="feature-badge">100% Client-Side</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================== -->
+    <!-- E. SAMPLE ADVENTURE GALLERY -->
+    <!-- ================================================== -->
+    <section class="section gallery-section" id="story-gallery">
+      <div class="container">
+        <div class="section-header-row">
+          <div>
+            <div class="section-tag">CHRONICLES VAULT</div>
+            <h2 class="section-headline">Featured Adventures</h2>
+            <p class="section-subtext">
+              Jump straight into our flagship preloaded adventure or explore atmospheric story templates.
+            </p>
+          </div>
+          <div class="gallery-controls">
+            <span class="gallery-status-pill">Interactive Story Gallery</span>
+          </div>
+        </div>
+
+        <div class="adventures-grid">
+          <!-- Featured Story: The Lost Crown -->
+          <div class="adventure-card featured-adventure">
+            <div class="card-visual-header lost-crown-visual">
+              <div class="card-visual-glow"></div>
+              <div class="card-badge-row">
+                <span class="badge-featured">PRELOADED MASTERPIECE</span>
+                <span class="badge-stats">9 Scenes • 3 Endings</span>
+              </div>
+              <div class="card-art-symbol">👑</div>
+            </div>
+            <div class="card-body">
+              <h3 class="card-title">The Lost Crown</h3>
+              <p class="card-tagline">"Every shard of frost remembers the throne it once served."</p>
+              <p class="card-desc">
+                Awaken on a sapphire terrace high above an endless sea of clouds. Armed only with a ticking silver chronometer, seek the truth behind the Queen's unwritten book, brave the inverted river, and uncover whether you shall wear the Crown of Remembering or herald the First Morning.
+              </p>
+              <div class="card-meta-list">
+                <span class="meta-tag">✦ Branching Fantasy</span>
+                <span class="meta-tag">✦ 3 Distinct Endings</span>
+                <span class="meta-tag">✦ Complete Graph</span>
+              </div>
+              <div class="card-actions">
+                <button type="button" class="btn btn-primary-cyan w-100" id="gallery-play-lost-crown">
+                  <span>▶ Play Adventure</span>
+                </button>
+                <a href="#story-studio" class="btn btn-outline-violet w-100" id="gallery-edit-lost-crown">
+                  <span>✎ Edit in Studio</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Adventure 2: Echoes of the Void -->
+          <div class="adventure-card">
+            <div class="card-visual-header void-visual">
+              <div class="card-visual-glow"></div>
+              <div class="card-badge-row">
+                <span class="badge-genre">DEEP SPACE SCI-FI</span>
+                <span class="badge-stats">Template Ready</span>
+              </div>
+              <div class="card-art-symbol">✦</div>
+            </div>
+            <div class="card-body">
+              <h3 class="card-title">Echoes of the Void</h3>
+              <p class="card-tagline">"Silence is not empty; it is waiting for an answer."</p>
+              <p class="card-desc">
+                You awaken aboard the research vessel *Aethelgard*, drifting at the event horizon of a dying binary star. The central AI speaks only in fractured hex-codes, and the airlock signals indicate an occupant who never departed.
+              </p>
+              <div class="card-meta-list">
+                <span class="meta-tag">✦ Cosmic Mystery</span>
+                <span class="meta-tag">✦ Survival Logic</span>
+              </div>
+              <div class="card-actions">
+                <button type="button" class="btn btn-glass-cyan w-100" id="load-template-void">
+                  <span>Load Into Studio</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Adventure 3: The Clockwork Labyrinth -->
+          <div class="adventure-card">
+            <div class="card-visual-header clockwork-visual">
+              <div class="card-visual-glow"></div>
+              <div class="card-badge-row">
+                <span class="badge-genre">STEAMPUNK PUZZLE</span>
+                <span class="badge-stats">Template Ready</span>
+              </div>
+              <div class="card-art-symbol">⚙</div>
+            </div>
+            <div class="card-body">
+              <h3 class="card-title">The Clockwork Labyrinth</h3>
+              <p class="card-tagline">"Each gear turns with the weight of stolen centuries."</p>
+              <p class="card-desc">
+                Beneath the iron towers of New Brassica lies a maze whose corridors shift every sixty seconds. Trapped with only an antique pocket compass, choose your doors wisely before the master clock strikes midnight.
+              </p>
+              <div class="card-meta-list">
+                <span class="meta-tag">✦ Puzzle Escape</span>
+                <span class="meta-tag">✦ Mechanical Intrigue</span>
+              </div>
+              <div class="card-actions">
+                <button type="button" class="btn btn-glass-cyan w-100" id="load-template-clockwork">
+                  <span>Load Into Studio</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================== -->
+    <!-- F, H. STORY STUDIO (A REAL AUTHORING WORKSPACE) -->
+    <!-- ================================================== -->
+    <section class="section studio-section" id="story-studio">
+      <div class="container-fluid studio-container">
+        
+        <!-- Studio Top Control Bar -->
+        <div class="studio-header-bar">
+          <div class="studio-header-left">
+            <div class="studio-title-block">
+              <span class="studio-kicker">STORY STUDIO</span>
+              <h2 class="studio-main-heading">Create Your Story</h2>
+            </div>
+            
+            <div class="story-title-editor-wrap">
+              <label for="story-title-input" class="sr-only">Story Title</label>
+              <input type="text" id="story-title-input" class="input-dark story-title-input" value="The Lost Crown" placeholder="Story Title...">
+            </div>
+
+            <div class="studio-badges-wrap">
+              <span class="badge-scene-count" id="studio-scene-count-badge">
+                <strong id="scene-counter-num">9</strong> Scenes
+              </span>
+              <div class="autosave-status-pill" id="studio-save-status">
+                <span class="save-dot"></span>
+                <span id="save-status-label">Saved in this browser</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="studio-header-right">
+            <button type="button" class="btn btn-sm btn-glass" id="btn-export-json" title="Download story as .json file">
+              <span class="btn-icon">⬇</span> Export JSON
+            </button>
+            <label class="btn btn-sm btn-glass file-upload-btn" title="Import story from .json file">
+              <span class="btn-icon">⬆</span> Import JSON
+              <input type="file" id="input-import-json" accept=".json" class="sr-only">
+            </label>
+            <button type="button" class="btn btn-sm btn-glass" id="btn-reset-default" title="Restore the complete default story">
+              <span class="btn-icon">↺</span> Reset Default
+            </button>
+            <button type="button" class="btn btn-sm btn-glow-cyan" id="studio-play-current-btn" title="Test this story in Play Mode">
+              <span class="btn-icon">▶</span> Play Story
+            </button>
+          </div>
+        </div>
+
+        <!-- Studio Main Workspace: 3-Column Studio Grid -->
+        <div class="studio-workspace-grid">
+          
+          <!-- ======================================= -->
+          <!-- COLUMN 1: SCENE NAVIGATOR & MANAGER -->
+          <!-- ======================================= -->
+          <aside class="studio-col col-scenes" aria-label="Scene Navigator">
+            <div class="col-header">
+              <div class="col-title-row">
+                <h3 class="col-title">Scene Navigator</h3>
+                <span class="col-count" id="sidebar-count-text">9 total</span>
+              </div>
+              <div class="sidebar-search-box">
+                <input type="text" id="scene-search-input" class="input-dark input-sm" placeholder="Search scenes...">
+              </div>
+              <button type="button" class="btn btn-primary-cyan w-100" id="btn-add-scene">
+                <span class="btn-icon">+</span> Add New Scene
+              </button>
+            </div>
+
+            <div class="scene-list-scrollable" id="scene-list-container" role="listbox" aria-label="List of Story Scenes">
+              <!-- Dynamically populated scene cards -->
+            </div>
+          </aside>
+
+          <!-- ======================================= -->
+          <!-- COLUMN 2: ACTIVE SCENE EDITOR -->
+          <!-- ======================================= -->
+          <section class="studio-col col-editor" aria-label="Active Scene Editor">
+            <div class="col-header">
+              <div class="editor-header-meta">
+                <span class="editor-scene-id-badge" id="editor-scene-id">ID: scene-palace-time</span>
+                <div class="editor-flags-group">
+                  <button type="button" class="flag-toggle-btn" id="btn-toggle-start" title="Set this scene as the starting point">
+                    <span class="flag-icon">★</span>
+                    <span class="flag-label" id="start-flag-label">Start Scene</span>
+                  </button>
+                  <button type="button" class="flag-toggle-btn" id="btn-toggle-ending" title="Mark this scene as an ending">
+                    <span class="flag-icon">🏁</span>
+                    <span class="flag-label" id="ending-flag-label">Mark as Ending</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="editor-scrollable-body" id="editor-body">
+              <!-- Scene Title Field -->
+              <div class="form-group">
+                <label for="scene-title-input" class="form-label">
+                  Scene Title <span class="required-star">*</span>
+                </label>
+                <input type="text" id="scene-title-input" class="input-dark input-lg" placeholder="e.g. The Palace at the Edge of Time" value="">
+              </div>
+
+              <!-- Scene Story Narrative Field -->
+              <div class="form-group">
+                <div class="form-label-row">
+                  <label for="scene-text-input" class="form-label">
+                    Story Narrative <span class="required-star">*</span>
+                  </label>
+                  <span class="word-count-badge" id="scene-word-count">0 words</span>
+                </div>
+                <textarea id="scene-text-input" class="input-dark textarea-narrative" rows="7" placeholder="Write the prose for this scene... What does the player behold? What mysterious forces are at play?"></textarea>
+                <p class="form-hint">Rich descriptive prose forms the heart of the adventure in Play Mode.</p>
+              </div>
+
+              <!-- Ending Banner (shown if marked as ending) -->
+              <div class="ending-scene-notice" id="ending-scene-notice" style="display: none;">
+                <div class="notice-icon">👑</div>
+                <div class="notice-text">
+                  <strong>Story Ending Point</strong>
+                  <p>This scene concludes a timeline. When reached, readers see the final resolution and can restart their adventure.</p>
+                </div>
+              </div>
+
+              <!-- Choices Section -->
+              <div class="choices-section" id="choices-section-container">
+                <div class="choices-header-row">
+                  <div>
+                    <h4 class="choices-title">Player Choices</h4>
+                    <p class="choices-subtitle">Each choice directs the reader to another destination scene.</p>
+                  </div>
+                  <div class="choices-counter-badge" id="choices-counter-badge">
+                    <span id="choices-count-current">0</span> / 4 Max
+                  </div>
+                </div>
+
+                <!-- Choice cards list -->
+                <div class="choices-list" id="choices-list">
+                  <!-- Dynamically populated choices -->
+                </div>
+
+                <!-- Add Choice Button with helper limit explanation -->
+                <div class="add-choice-row">
+                  <button type="button" class="btn btn-outline-cyan" id="btn-add-choice">
+                    <span class="btn-icon">+</span> Add Choice (<span id="btn-add-choice-counter">0/4</span>)
+                  </button>
+                  <p class="choice-limit-hint" id="choice-limit-hint">
+                    Maximum 4 choices per scene for optimal reader clarity.
+                  </p>
+                </div>
+              </div>
+
+              <!-- Safe Deletion and Action Controls -->
+              <div class="editor-bottom-bar">
+                <button type="button" class="btn btn-outline-danger" id="btn-delete-scene">
+                  <span class="btn-icon">🗑</span> Delete Scene
+                </button>
+                <div class="editor-bottom-right">
+                  <button type="button" class="btn btn-glass" id="btn-preview-scene">
+                    <span class="btn-icon">👁</span> Play From This Scene
+                  </button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- ======================================= -->
+          <!-- COLUMN 3: TABS (GRAPH / DIAGNOSTICS / PREVIEW) -->
+          <!-- ======================================= -->
+          <section class="studio-col col-tools" aria-label="Visual Tools and Diagnostics">
+            <!-- Tool Tabs Navigation -->
+            <div class="tool-tabs-bar" role="tablist">
+              <button type="button" class="tool-tab active" role="tab" id="tab-btn-graph" aria-selected="true" aria-controls="tool-panel-graph">
+                <span class="tab-icon">☊</span> Story Graph
+              </button>
+              <button type="button" class="tool-tab" role="tab" id="tab-btn-diagnostics" aria-selected="false" aria-controls="tool-panel-diagnostics">
+                <span class="tab-icon">⚡</span> Diagnostics <span class="badge-issues-count" id="badge-issues-count">0</span>
+              </button>
+              <button type="button" class="tool-tab" role="tab" id="tab-btn-preview" aria-selected="false" aria-controls="tool-panel-preview">
+                <span class="tab-icon">👁</span> Quick Reader
+              </button>
+            </div>
+
+            <!-- TAB 1: VISUAL STORY GRAPH -->
+            <div class="tool-tab-panel active" id="tool-panel-graph" role="tabpanel" aria-labelledby="tab-btn-graph">
+              <div class="graph-toolbar">
+                <div class="graph-legend">
+                  <span class="legend-item"><span class="legend-dot dot-start"></span> Start</span>
+                  <span class="legend-item"><span class="legend-dot dot-normal"></span> Scene</span>
+                  <span class="legend-item"><span class="legend-dot dot-ending"></span> Ending</span>
+                </div>
+                <div class="graph-zoom-controls">
+                  <button type="button" class="btn-icon-sm" id="btn-graph-zoom-in" title="Zoom In">+</button>
+                  <button type="button" class="btn-icon-sm" id="btn-graph-zoom-out" title="Zoom Out">−</button>
+                  <button type="button" class="btn-icon-sm" id="btn-graph-reset" title="Fit to View">⛶</button>
+                </div>
+              </div>
+
+              <!-- Interactive SVG Graph Container -->
+              <div class="graph-canvas-container" id="graph-container">
+                <svg id="story-graph-svg" class="story-graph-svg" width="100%" height="100%">
+                  <defs>
+                    <marker id="arrow-cyan" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                      <path d="M 0 1 L 9 5 L 0 9 z" fill="#43E6E8"/>
+                    </marker>
+                    <marker id="arrow-violet" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                      <path d="M 0 1 L 9 5 L 0 9 z" fill="#A78BFA"/>
+                    </marker>
+                    <marker id="arrow-gold" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                      <path d="M 0 1 L 9 5 L 0 9 z" fill="#F5D061"/>
+                    </marker>
+                  </defs>
+                  <g id="graph-viewport-g">
+                    <g id="graph-edges-g"></g>
+                    <g id="graph-nodes-g"></g>
+                  </g>
+                </svg>
+                <div class="graph-click-hint">Click any node to select and edit</div>
+              </div>
+            </div>
+
+            <!-- TAB 2: STORY DIAGNOSTICS & BFS REACHABILITY -->
+            <div class="tool-tab-panel" id="tool-panel-diagnostics" role="tabpanel" aria-labelledby="tab-btn-diagnostics" style="display: none;">
+              <div class="diagnostics-panel-inner" id="diagnostics-anchor">
+                <div class="diagnostics-summary-card" id="diagnostics-summary-card">
+                  <div class="diag-status-icon" id="diag-summary-icon">✓</div>
+                  <div class="diag-status-text">
+                    <h4 class="diag-summary-title" id="diag-summary-title">Story Graph Healthy</h4>
+                    <p class="diag-summary-desc" id="diag-summary-desc">All scenes reachable, zero dead-ends found.</p>
+                  </div>
+                </div>
+
+                <div class="diag-metrics-grid">
+                  <div class="diag-metric-box">
+                    <span class="diag-num" id="diag-metric-reachable">9/9</span>
+                    <span class="diag-label">Reachable from Start</span>
+                  </div>
+                  <div class="diag-metric-box">
+                    <span class="diag-num" id="diag-metric-endings">3</span>
+                    <span class="diag-label">Ending Scenes</span>
+                  </div>
+                  <div class="diag-metric-box">
+                    <span class="diag-num" id="diag-metric-choices">15</span>
+                    <span class="diag-label">Choice Connections</span>
+                  </div>
+                  <div class="diag-metric-box">
+                    <span class="diag-num" id="diag-metric-max-depth">3</span>
+                    <span class="diag-label">Shortest Ending Path</span>
+                  </div>
+                </div>
+
+                <div class="diagnostics-issues-section">
+                  <h4 class="diag-issues-heading">Validation Report</h4>
+                  <div class="issues-list" id="diagnostics-issues-list">
+                    <!-- Dynamically populated validation warnings or success -->
+                  </div>
+                </div>
+
+                <div class="diagnostics-help-box">
+                  <h5 class="help-box-title">Validation Rules Checked:</h5>
+                  <ul class="help-box-list">
+                    <li>✦ Breadth-First Search (BFS) reachability from start scene</li>
+                    <li>✦ Dead-end non-ending scenes (scenes without choices that aren't marked as endings)</li>
+                    <li>✦ Broken choice links pointing to nonexistent scene IDs</li>
+                    <li>✦ Valid starting scene assignment</li>
+                    <li>✦ Choice limit compliance (max 4 per scene)</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <!-- TAB 3: QUICK MINI READER -->
+            <div class="tool-tab-panel" id="tool-panel-preview" role="tabpanel" aria-labelledby="tab-btn-preview" style="display: none;">
+              <div class="mini-preview-wrap">
+                <div class="mini-preview-header">
+                  <span class="mini-preview-tag">LIVE SCENE PREVIEW</span>
+                  <button type="button" class="btn btn-xs btn-outline-cyan" id="btn-open-full-player">
+                    Open Full Play Mode ↗
+                  </button>
+                </div>
+                <div class="mini-preview-content">
+                  <h3 class="mini-scene-title" id="mini-scene-title">Title</h3>
+                  <div class="mini-scene-text" id="mini-scene-text">Narrative text...</div>
+                  <div class="mini-choices-container" id="mini-choices-container">
+                    <!-- Dynamically previewed choices -->
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </section>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================== -->
+    <!-- G. PLAY MODE (IMMERSIVE INTERACTIVE STORY READER) -->
+    <!-- ================================================== -->
+    <section class="section play-section" id="play-mode-section">
+      <div class="container play-container">
+        
+        <!-- Reader Navigation & Status Bar -->
+        <div class="reader-top-bar">
+          <div class="reader-meta">
+            <span class="reader-kicker">CHRONO TALES READER</span>
+            <h2 class="reader-story-title" id="reader-story-title">The Lost Crown</h2>
+          </div>
+
+          <div class="reader-progress-info">
+            <span class="step-pill" id="reader-step-counter">Step 1</span>
+            <div class="reader-history-chain" id="reader-history-chain">
+              <!-- Breadcrumb pills of scenes visited -->
+            </div>
+          </div>
+
+          <div class="reader-controls">
+            <button type="button" class="btn btn-sm btn-glass" id="btn-reader-back" title="Step back to previous scene" disabled>
+              ← Back
+            </button>
+            <button type="button" class="btn btn-sm btn-glass" id="btn-reader-restart" title="Restart adventure from the beginning">
+              ↺ Restart
+            </button>
+            <a href="#story-studio" class="btn btn-sm btn-outline-violet" id="btn-reader-return-studio">
+              ✎ Edit Story
+            </a>
+          </div>
+        </div>
+
+        <!-- Main Narrative Reader Card -->
+        <div class="reader-card" id="reader-card">
+          
+          <div class="reader-card-inner">
+            <!-- Scene Header -->
+            <div class="reader-scene-header">
+              <span class="reader-scene-number" id="reader-scene-number">SCENE I</span>
+              <h1 class="reader-scene-title" id="reader-scene-title">
+                The Palace at the Edge of Time
+              </h1>
+            </div>
+
+            <!-- Scene Story Narrative Body -->
+            <div class="reader-narrative-body" id="reader-narrative-body">
+              <p class="reader-narrative-text" id="reader-narrative-text">
+                You awaken upon a terrace of frost-carved sapphire...
+              </p>
+            </div>
+
+            <!-- Ending State Banner (Visible when ending is reached) -->
+            <div class="reader-ending-banner" id="reader-ending-banner" style="display: none;">
+              <div class="ending-crown-icon">👑</div>
+              <div class="ending-badge-tag">TIMELINE CONCLUDED</div>
+              <h2 class="ending-title" id="reader-ending-title">A Crown Made of Remembering</h2>
+              <p class="ending-summary" id="reader-ending-summary">
+                You have reached one of the destinies of Asterfall. Your journey across the frozen spires has reshaped reality.
+              </p>
+              <div class="ending-stats-row">
+                <div class="ending-stat">
+                  <span class="stat-val" id="ending-steps-val">4</span>
+                  <span class="stat-lbl">Decisions Made</span>
+                </div>
+                <div class="ending-stat">
+                  <span class="stat-val" id="ending-total-scenes-val">9</span>
+                  <span class="stat-lbl">World Scenes</span>
+                </div>
+              </div>
+              <div class="ending-cta-row">
+                <button type="button" class="btn btn-lg btn-glow-gold" id="btn-ending-restart">
+                  ↺ Play Again From Start
+                </button>
+                <a href="#story-studio" class="btn btn-lg btn-glass-cyan" id="btn-ending-edit">
+                  ✎ Customize This Adventure
+                </a>
+              </div>
+            </div>
+
+            <!-- Interactive Choices List (Visible when not ending) -->
+            <div class="reader-choices-wrap" id="reader-choices-wrap">
+              <h3 class="reader-choices-heading">What will you choose?</h3>
+              <div class="reader-choices-grid" id="reader-choices-grid">
+                <!-- Choice buttons dynamically rendered -->
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Ambient Reader Background Elements -->
+          <div class="reader-ambient-glow"></div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================================================== -->
+    <!-- MODALS & OVERLAYS -->
+    <!-- ================================================== -->
+    
+    <!-- Safe Delete Confirmation Modal -->
+    <div class="modal-backdrop" id="modal-delete-confirm" style="display: none;">
+      <div class="modal-dialog">
+        <div class="modal-header">
+          <h3 class="modal-title">Delete Scene</h3>
+          <button type="button" class="modal-close" id="btn-close-delete-modal">×</button>
+        </div>
+        <div class="modal-body">
+          <p id="delete-modal-msg">
+            Are you sure you want to delete this scene? Any choices in other scenes pointing to this scene will be automatically and safely cleaned up.
+          </p>
+          <div class="modal-warning-box">
+            This action cannot be undone unless you have exported a JSON backup.
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-glass" id="btn-cancel-delete">Cancel</button>
+          <button type="button" class="btn btn-danger" id="btn-confirm-delete">Delete Scene</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Alert / Toast Container -->
+    <div class="toast-container" id="toast-container" aria-live="polite"></div>
+
+  </main>
+
+  <!-- ================================================== -->
+  <!-- I. FOOTER -->
+  <!-- ================================================== -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand-col">
+          <div class="footer-logo">
+            <span class="brand-symbol small">
+              <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M16 2L28 10V22L16 30L4 22V10L16 2Z" stroke="#43E6E8" stroke-width="2"/>
+                <circle cx="16" cy="16" r="3" fill="#A78BFA"/>
+              </svg>
+            </span>
+            <span class="footer-brand-title">CHRONO TALES</span>
+          </div>
+          <p class="footer-tagline">"Every Choice Creates a Universe."</p>
+          <p class="footer-desc">
+            A real, fully-functional 3D branching story builder built for the university vibe-coding competition. Procedural Three.js floating palace, live interactive story graph, BFS diagnostics, and offline browser autosave.
+          </p>
+        </div>
+
+        <div class="footer-nav-col">
+          <h4 class="footer-heading">Navigation</h4>
+          <ul class="footer-links">
+            <li><a href="#hero">Floating Ice Palace</a></li>
+            <li><a href="#story-studio">Story Studio</a></li>
+            <li><a href="#play-mode-section">Play Story Reader</a></li>
+            <li><a href="#story-gallery">Adventure Vault</a></li>
+            <li><a href="#diagnostics-anchor">Story Diagnostics</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-specs-col">
+          <h4 class="footer-heading">Technical Highlights</h4>
+          <ul class="footer-specs">
+            <li>✦ <strong>Visuals:</strong> Three.js Procedural WebGL Palace with Parallax Scroll</li>
+            <li>✦ <strong>Architecture:</strong> Pure HTML/CSS/JS (Zero Build Tools)</li>
+            <li>✦ <strong>Persistence:</strong> LocalStorage Autosave & JSON I/O</li>
+            <li>✦ <strong>Graph Engine:</strong> Dynamic SVG Node & Edge Mapping</li>
+            <li>✦ <strong>Validation:</strong> BFS Reachability & Dead-End Checks</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div class="footer-copy">
+          © 2026 Chrono Tales. Built with passion for interactive storytelling and 3D web graphics.
+        </div>
+        <div class="footer-tech-pill">
+          <span>Three.js r128</span> • <span>WebGL</span> • <span>SVG Graph</span> • <span>100% Client-Side</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Application Logic -->
+  <script src="script.js"></script>
+</body>
+</html>
